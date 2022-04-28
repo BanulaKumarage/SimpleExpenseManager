@@ -128,7 +128,7 @@ public class PersistentAccountDAO extends DataBaseHelper implements AccountDAO {
                 break;
         }
 
-        String updateSql = "update accounts set balance = "+ balance +" ;";
+        String updateSql = "update accounts set balance = "+ balance +" where accountNo = '"+accountNo+"' ;";
         db.execSQL(updateSql);
         cursor.close();
         db.close();
