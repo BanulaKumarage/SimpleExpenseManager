@@ -23,7 +23,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String createAccSql = "CREATE TABLE accounts(accountNo text primary key, bankName text, accountHolderName text, balance real);";
         db.execSQL(createAccSql);
 
-        String createTransactionSql = "create table transactions(transactionId integer primary key autoincrement, date text, accountNo text, type text, amount real);";
+        String createTransactionSql = "create table transactions(transactionId integer primary key autoincrement, date text, accountNo text, type text, amount real, foreign key(accountNo) references account(accountNo));";
         db.execSQL(createTransactionSql);
 
 

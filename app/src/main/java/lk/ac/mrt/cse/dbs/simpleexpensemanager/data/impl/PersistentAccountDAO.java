@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,8 +129,12 @@ public class PersistentAccountDAO extends DataBaseHelper implements AccountDAO {
                 break;
         }
 
-        String updateSql = "update accounts set balance = "+ balance +" where accountNo = '"+accountNo+"' ;";
-        db.execSQL(updateSql);
+        String updateSql = "update accounts set balance = ? where accountNo = ? ;";
+        SQLiteStatement statement = db.compileStatement(updateSql);
+        statement.bindDouble(1,balance);
+        statement.bindString(2,accountNo);
+        statement.executeUpdateDelete();
+        statement.close();
         cursor.close();
         db.close();
 
