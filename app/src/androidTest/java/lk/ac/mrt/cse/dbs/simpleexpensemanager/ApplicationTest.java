@@ -54,10 +54,21 @@ public class ApplicationTest{
     }
 
     @Test
-    public void addTranactionTest(){
+    public void addTranactionExpenseTest(){
         int noOfTransactions = expenseManager.getTransactionLogs().size();
         try {
             expenseManager.updateAccountBalance("78945Z", 1, 1, 2000, ExpenseType.EXPENSE, "1000.0");
+            assertEquals(noOfTransactions +1,expenseManager.getTransactionLogs().size());
+        } catch (InvalidAccountException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void addTranactionIncomeTest(){
+        int noOfTransactions = expenseManager.getTransactionLogs().size();
+        try {
+            expenseManager.updateAccountBalance("78945Z", 1, 1, 2000, ExpenseType.INCOME, "1000.0");
             assertEquals(noOfTransactions +1,expenseManager.getTransactionLogs().size());
         } catch (InvalidAccountException e) {
             e.printStackTrace();
